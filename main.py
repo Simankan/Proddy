@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands
+import datetime
+import asyncio
 import os
 
 client = commands.Bot(command_prefix = '$')
@@ -12,10 +14,10 @@ welcome_text = ' to Team 6 DL5!\nWe are so excited to have you with us and look 
 async def on_ready():
   print('We have logged in as {0.user}'.format(client))
 
-# @client.event
-# async def on_member_join(member):
-#   role = discord.utils.get(member.server.roles, id="Leader")
-#   await member.add_roles(member, role)
+@client.event
+async def on_member_join(member):
+  role = discord.utils.get(member.server.roles, id='Leader')
+  await client.add_roles(member, role)
 
 @client.command() 
 async def about(ctx):
@@ -34,7 +36,6 @@ async def message(ctx, user:discord.User, *, message=None):
 async def message_custom(ctx, user:discord.User, *, message):
   await ctx.send('Successful.')
   await user.send(f'{message}')
-
 
 my_secret = os.environ['BotToken']
 client.run(my_secret)
