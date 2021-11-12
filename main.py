@@ -8,8 +8,8 @@ client = commands.Bot(command_prefix = '$')
 
 help_text = "Hello! My name is Proddy I have 3 core features:\n```1. Reminder \n2. Polling/voting\n3. Introduction message```"
 welcome_text = ' to Team 6 DL5!\nWe are so excited to have you with us and look forward to working with you!\nYour server role will be assigned automatically. Please let anyone know if you have any questions.'
-#
-#
+
+
 @client.event
 async def on_ready():
   print('We have logged in as {0.user}'.format(client))
@@ -36,7 +36,45 @@ async def message(ctx, user:discord.User, *, message=None):
 async def message_custom(ctx, user:discord.User, *, message):
   await ctx.send('Successful.')
   await user.send(f'{message}')
+  
+'''
+def convert(time):
+ pos = ['s', 'm', 'h', 'd']
 
+ time_dict = {"s": 1, "m": 60, "h": 3600, "d": 3600*24}
+
+ unit = time[-1]
+
+ if unit not in pos:
+  return -1
+ try:
+  val = int(time[:-1])
+ except:
+  return -2
+
+ return val * time_dict[unit] 
+'''
+
+''''
+# start remind()
+@client.command()
+async def poll(ctx, time, *, task):
+  converted_time = convert(time)
+  
+  if(converted_time==1):
+    await ctx.send("You didnt input time correctly")
+    return
+
+ if(converted_time==-2):
+   await ctx.send("You didnt input time correctly")
+ 
+await ctx.send(f"Start reminder for**{task}** and will last **{time}**."" )
+await asyncio.sleep(convert_time)
+await ctx.send()
+'''
+      
+  
+# start poll()
 @client.command()
 async def poll(ctx, c1, c2, c3, c4, c5, *, topic):
   choices = [c1, c2, c3, c4 ,c5]
@@ -76,7 +114,7 @@ async def poll(ctx, c1, c2, c3, c4, c5, *, topic):
  # if(c5 != "-"):
   await message.add_reaction("5️⃣")
   
-  await asyncio.sleep(4) # 10 second timer
+  await asyncio.sleep(15) # 15 second timer
 
   newmessage = await ctx.fetch_message(message.id)
   # countArray = [0, 0, 0, 0, 0]
@@ -129,7 +167,62 @@ async def poll(ctx, c1, c2, c3, c4, c5, *, topic):
   embed.set_footer(text = f"{choices}")
 
   await newmessage.edit(embed = embed)
+  # end poll()
 
+
+#Reminder func
+##@commands.command()
+@client.command()
+async def remind(ctx,time, * ,task):
+  def convert(time):
+    pos = ['s', 'm', 'h', 'd']
+
+    time_dict = {"s": 1, "m": 60, "h": 3600, "d": 3600*24}
+
+    unit = time[-1]
+
+    if unit not in pos:
+      return -1
+    try:
+      val = int(time[:-1])
+    except:
+      return -2
+      
+    return val * time_dict[unit]
+  
+  converted_time = convert(time)
+  if converted_time == -1:
+    await ctx.send("You didn't enter the time in correctly")
+    return
+  if converted_time == -2:
+    await ctx.send("You must enter an integer")
+    return
+
+  message = await ctx.reply(f"Started reminder for **{task}** and will last **{time}**.")
+  await asyncio.sleep(converted_time)
+
+  try:
+     await ctx.author.send(f"Reminder for **{task}**")
+  except:
+     await ctx.reply(f"Reminder for **{task}**")
+
+  await message.edit(content="Reminded!")
+  #await ctx.send(f"Started reminder for **{task}** and will last **{time}**.")
+
+  #await ctx.send(f"{ctx.auther.mention} your reminder for **{task}** has finished!")
+
+
+
+  # 
+
+  '''
+  await ctx.send(f"Started reminder for **{task}** and will last **{time}**.")
+  
+  await asyncio.sleep(converted_time)
+  await ctx.send(f"{ctx.auther.mention} your reminder for **{task}** has finished!")
+  '''
+
+#client.add_cog(remind(client))
   
 
 my_secret = os.environ['BotToken']
