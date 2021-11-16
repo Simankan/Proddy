@@ -59,27 +59,27 @@ async def message_custom(ctx, user:discord.User, *, message):
 async def poll(ctx, c1, c2, c3, c4, c5, time, *, topic):
   choices = [c1, c2, c3, c4 ,c5]
 
-#Initilizes embeded message
+# Initilizes embeded message
   embed = discord.Embed(title = topic, description = f":one: {choices[0]}\n:two: {choices[1]}\n:three: {choices[2]}\n:four: {choices[3]}\n:five: {choices[4]}\n", color = ctx.author.color, timestamp = datetime.datetime.utcnow())
   embed.set_footer(text = f"Poll started by {ctx.author.name}")
   embed.set_thumbnail(url = ctx.author.avatar_url)
   message = await ctx.send(embed = embed)
-  #End embeded initialization
+  # End embeded initialization
 
-  #Put click-able reactions on message
+  # Put click-able reactions on message
   await message.add_reaction("1️⃣")
   await message.add_reaction("2️⃣")
   await message.add_reaction("3️⃣")
   await message.add_reaction("4️⃣")
   await message.add_reaction("5️⃣")
-  #End reactions
+  # End reactions
 
   converted_time = convert(time) # Call to convert to standardize time 
   if converted_time < 0:
     await ctx.send("You didn't enter the time in correctly")
     return
   
-  for i in range(converted_time):
+  for i in range(converted_time): # Timer
     await asyncio.sleep(1)
     embed.set_footer(text = f"Time remaining: {converted_time-i}\nPoll started by {ctx.author.name}")
     await message.edit(embed = embed)
@@ -90,7 +90,7 @@ async def poll(ctx, c1, c2, c3, c4, c5, time, *, topic):
   highestVote = 0;
   counter = [0, 0, 0, 0, 0]
   for x in range(len(newmessage.reactions)):
-    if(choices[x] == "-"):
+    if(choices[x] == "-"): # Ignore dashes
        continue
     
     counter[x] = len(await newmessage.reactions[x].users().flatten())
@@ -106,18 +106,19 @@ async def poll(ctx, c1, c2, c3, c4, c5, time, *, topic):
   else:
     tempMultiResults = ["", "", "", "", ""]
     for x in range(5):
-      if(counter[x] == highestVote):
+      if(counter[x] == highestVote): # Handle ties
         tempMultiResults[x] = choices[x]
 
     result = ""
 
-    for x in range(len(tempMultiResults)):
+    for x in range(len(tempMultiResults)): # Ties
       result += tempMultiResults[x] + " "
   
   embed = discord.Embed(title = topic, description = f"Result: {result}", color = ctx.author.color, timestamp = datetime.datetime.utcnow())
   embed.set_footer(text = f"{choices}")
 
   await newmessage.edit(embed = embed)
+
 
 # command that takes in time and task and reminds user after the time is up 
 @client.command()
@@ -136,6 +137,7 @@ async def remind(ctx,time, * ,task):
      await ctx.reply(f"Reminder for **{task}**")
 
   await message.edit(content="Reminded!")
+
 
 keep_alive()
 my_secret = os.environ['BotToken']
