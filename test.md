@@ -2,7 +2,7 @@
 on_ready()
 Case 1:
     input: start bot
-    expected output: We have logged in as Proddy#5290
+    \nexpected output: We have logged in as Proddy#5290
     
 --------------------------------------------------------------------------
 about()
