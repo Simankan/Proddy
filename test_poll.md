@@ -7,3 +7,4 @@ expected output: 2
 
 **Case_2** \
 input: $poll 
+
