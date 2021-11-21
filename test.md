@@ -3,6 +3,7 @@ on_ready()
 Case 1:
     input: start bot
     expected output: We have logged in as Proddy#5290
+    
 --------------------------------------------------------------------------
 about()
 Case 1:
@@ -10,8 +11,8 @@ Case 1:
     expected output: Hello! My name is Proddy I have 3 core features:
         1. Introduction message: This feature allows the user to personalize an introduction message to new users.    
            Use the command below and replace [user] with the target user and [message] with your message. There are two version of message command you can use.
-           $message [user]
-           $message_custom [user] [message]
+           $message [\user]\
+           $message_custom [\user]\ [\message]\
            I.E. $message @uriel
            I.E. $message @uriel hello, my name is Uriel. Welcome to the team!
 
