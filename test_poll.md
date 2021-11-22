@@ -1,4 +1,4 @@
-**opoll(c1, c2, c3, c4, c5, time, topic):**
+**poll(c1, c2, c3, c4, c5, time, topic):**
 --------------------------------------------------------------------------
     Case 1: Single result #1
         input: $poll 1 2 3 4 5 15s What is your faovrite number?
