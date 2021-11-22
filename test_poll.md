@@ -22,8 +22,8 @@
 
     Case 5: Ignore Dashes
         input: $poll Red - Yellow Green - 15s What is your favorite color?
-        interaction: reaction 2 is selected by two users
-        expected output: 
+        interaction: reaction 2 & 1 are selected by two users
+        expected output: Red
 
     Case 6: Ignore Dashes & Single Tie
         input: $poll poll Red - Yellow Green - 15s What is your favorite color?
