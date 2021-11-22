@@ -34,4 +34,3 @@
         input: $poll - Orange Yellow Green - 15s What is your favorite color?
         interaction: reaction 1, 2, 3, 4, and 5 are selected by two users
         expected output: Orange Yellow Green
---------------------------------------------------------------------------
